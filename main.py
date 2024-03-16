@@ -32,11 +32,15 @@ def check_database(ip_address):
 def checktoxic():
     toxic_file = 'toxic.json'
     if os.path.exists(toxic_file):
-        with open(toxic, 'r') as file:
+        with open(toxic_file, 'r') as file:
             data = json.load(file)
             for username in data.items():
                     return username  # Kembalikan nama pengguna yang terkait
     return None
+
+# Fungsi untuk mendeteksi apakah aplikasi berjalan di Render
+def is_render():
+    return os.getenv("RENDER") == "true"
 
 @app.route('/', methods=['GET', 'POST'])
 def register():
@@ -114,4 +118,9 @@ def toxic():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    # Jalankan aplikasi Flask tanpa mode debug dan menggunakan port default jika di Render
+    if is_render():
+        app.run(debug=False)
+    else:
+        # Jika tidak di Render, jalankan dengan mode debug dan port khusus
+        app.run(debug=True, port=10000)
