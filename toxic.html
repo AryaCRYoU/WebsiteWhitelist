@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="icon" href="img/logo.png">
+    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+    <style>
+        body {
+            background: #474A59;
+            font-family: 'Inter UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .page {
+            background: #474A59;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .left, .right {
+            background: #5f6473;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .error {
+            font-size: 30px;
+            color: white;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .message {
+            color: #ff0000;
+            font-size: 18px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .info {
+            color: #c2c2c5;
+            font-size: 14px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="container">
+            <div class="left">
+                <div class="error">Error</div>
+                <div class="message">Anda Toxic!</div>
+            </div>
+            <div class="right">
+                <div class="info" id="userInfo"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Ambil data dari database.json
+        fetch('toxic.json')
+            .then(response => response.json())
+            .then(data => {
+                // Cari IP yang diblokir
+                const blockeduser = Object.keys(data)[0];
+                // Cari nama pengguna yang sesuai dengan IP yang diblokir
+                const blockedUsername = data[blockeduser];
+                // Tampilkan informasi di halaman HTML
+                document.getElementById('userInfo').innerHTML = `Pengguna dengan nama ${blockedUsername} berisi Tulisan Terlarang.`;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>
