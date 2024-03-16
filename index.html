@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar</title>
+    <link rel="icon" href="img/logo.png">
+    <link href="https://rsms.me/inter/inter-ui.css" rel="stylesheet">
+    <style>
+        body {
+            background: #474A59;
+            font-family: 'Inter UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .page {
+            background: #474A59;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .left, .right {
+            background: #5f6473;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .login {
+            font-size: 30px;
+            color: white;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .eula {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .formLogin {
+            width: 100%;
+        }
+
+        label {
+            color: #c2c2c5;
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        input {
+            background: transparent;
+            border: 0;
+            color: #f2f2f2;
+            font-size: 16px;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #707070;
+        }
+
+        #submit {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        #submit:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="container">
+            <div class="left">
+                <div class="login">Daftar</div>
+                <div class="eula">Dengan Mendaftar, Anda Bisa Mengakses Server samp Eclipse City</div>
+            </div>
+            <div class="right">
+                <div class="formLogin">
+                    <form id="registrationForm" enctype="multipart/form-data" method="post">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Masukkan username Anda" required>
+                        <input type="submit" id="submit" value="Register">
+                        <p class="error-message" id="wrong"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
