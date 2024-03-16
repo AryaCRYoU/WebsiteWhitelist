@@ -29,19 +29,6 @@ def check_database(ip_address):
                     return username  # Kembalikan nama pengguna yang terkait
     return None
 
-def checktoxic():
-    toxic_file = 'toxic.json'
-    if os.path.exists(toxic_file):
-        with open(toxic_file, 'r') as file:
-            data = json.load(file)
-            for username in data.items():
-                    return username  # Kembalikan nama pengguna yang terkait
-    return None
-
-# Fungsi untuk mendeteksi apakah aplikasi berjalan di Render
-def is_render():
-    return os.getenv("RENDER") == "true"
-
 @app.route('/', methods=['GET', 'POST'])
 def register():
     ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)  # Dapatkan alamat IP pengguna
@@ -50,9 +37,6 @@ def register():
     if check_database(ip_address):
         return redirect(url_for('error', blocked_ip=ip_address))
         
-    if checktoxic():
-        return redirect(url_for('toxic', blockuser=username))
-
     if request.method == 'POST':
         username = request.form['username']
 
@@ -102,25 +86,5 @@ def error():
 
   return error_html
 
-@app.route('/toxic')
-def toxic():
-  blockuser = request.args.get('blockuser')
-  username = check_database(blockuser)
-
-  # Baca isi file error.html
-  with open('toxic.html', 'r') as file:
-      toxic_html = file.read()
-
-  # Ganti placeholder dengan nilai yang sesuai
-  toxic_html = toxic_html.replace('{{username}}', username)
-
-  return toxic_html
-
-
 if __name__ == '__main__':
-    # Jalankan aplikasi Flask tanpa mode debug dan menggunakan port default jika di Render
-    if is_render():
-        app.run(debug=False)
-    else:
-        # Jika tidak di Render, jalankan dengan mode debug dan port khusus
-        app.run(debug=True, port=10000)
+    app.run(debug=True)
